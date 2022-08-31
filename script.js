@@ -124,8 +124,8 @@ class Briliant extends Phaser.Scene {
       delay: 4000,
       duration: 2000,
       scale: 0.15,
-      x: 100,
-      y: 100,
+      x: 50,
+      y: 50,
     });
   }
 }
