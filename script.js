@@ -36,7 +36,7 @@ class Briliant extends Phaser.Scene {
         end: 3,
       }),
       frameRate: 5,
-      repeat: -1,
+      repeat: 5,
     });
 
     this.anims.create({
@@ -46,7 +46,7 @@ class Briliant extends Phaser.Scene {
         end: 3,
       }),
       frameRate: 5,
-      repeat: -1,
+      repeat: 5,
     });
 
     this.anims.create({
@@ -56,20 +56,22 @@ class Briliant extends Phaser.Scene {
         end: 3,
       }),
       frameRate: 5,
-      repeat: -1,
+      repeat: 7,
     });
 
     const brilliant_start = this.add
       .sprite(400, 300, "brilliant_start")
-      .setScale(0.1);
+      .setScale(0.348)
+      .setAlpha(0);
 
     const brilliant_middle = this.add
-      .sprite(600, 330, "brilliant_middle")
-      .setScale(0.2);
-
+      .sprite(400, 300, "brilliant_middle")
+      .setScale(0.7)
+      .setAlpha(0);
     const brilliant_finish = this.add
-      .sprite(600, 550, "brilliant_finish")
-      .setScale(0.2);
+      .sprite(400, 300, "brilliant_finish")
+      .setScale(0.896)
+      .setAlpha(0);
 
     brilliant_start.play({ key: "spin_start" });
     brilliant_middle.play({ key: "spin_middle" });
@@ -77,20 +79,53 @@ class Briliant extends Phaser.Scene {
 
     this.tweens.add({
       targets: brilliant_start,
-      duration: 2000,
-      scaleX: 1.1,
-      scaleY: 1.1,
+      delay: 1000,
+      duration: 1,
+      alpha: 1,
+    });
+
+    this.tweens.add({
+      targets: brilliant_start,
+      delay: 1000,
+      duration: 1000,
+      scale: 0.812,
+    });
+
+    this.tweens.add({
+      targets: brilliant_start,
+      delay: 2500,
+      duration: 1,
+      alpha: 0,
+    });
+
+    this.tweens.add({
+      targets: brilliant_middle,
+      delay: 2500,
+      duration: 1,
+      alpha: 1,
+    });
+
+    this.tweens.add({
+      targets: brilliant_middle,
+      delay: 4000,
+      duration: 1,
+      alpha: 0,
     });
 
     this.tweens.add({
       targets: brilliant_finish,
-      duration: 2000,
+      delay: 4000,
+      duration: 1,
+      alpha: 1,
+    });
 
-      x: 200,
-      y: 200,
-      //   paused: true,
-      //   yoyo: true,
-      //   repeat: -1,
+    this.tweens.add({
+      targets: brilliant_finish,
+      delay: 4000,
+      duration: 2000,
+      scale: 0.15,
+      x: 100,
+      y: 100,
     });
   }
 }
@@ -103,5 +138,8 @@ const config = {
   height: 600,
   scene: [Briliant],
 };
-
 const game = new Phaser.Game(config);
+
+document.querySelector("#reload").addEventListener("click", () => {
+  location.reload();
+});
